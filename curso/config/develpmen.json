@@ -1,0 +1,6 @@
+{
+    "nombre":"app rest full - desarrollo",
+    "configdb":{
+        "host":"pruebas-db-server-desarrollo"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "nombre":"app rest full - produccion",
+    "configdb":{
+        "host":"pruebas-db-server-produccion"
+    }
+}
