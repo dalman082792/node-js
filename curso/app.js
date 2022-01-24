@@ -21,7 +21,7 @@ if (app.get("env") === "develpmen") {
     debug("morgan esta abilitado..")
 }
 
-//trabajando con la DB
+//trabajando con la db
 debug("conectando a la bd")
 const usuarios = [
     { id: 1, nombre: "miztli" },
