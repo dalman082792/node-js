@@ -4,6 +4,7 @@
   "description": "desarrolo de una api resfull con node.js",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Alemán Sánchez",
