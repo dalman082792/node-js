@@ -1,10 +1,18 @@
 const express = require("express");
-const ruta = express();
+const ruta = express.Router();
+const Joi = require('joi');
 
-ruta.get("/usuarios", (req, res) => {
+
+const usuarios = [
+    { id: 1, nombre: "miztli" },
+    { id: 2, nombre: "nancy" },
+    { id: 3, nombre: "david" }
+];
+
+ruta.get("/", (req, res) => {
     res.send(usuarios)
 });
-ruta.get("/usuarios/:id", (req, res) => {
+ruta.get("/:id", (req, res) => {
     let usuario = encontrarUsuario(req.params.id)
     if (!usuario) {
         res.status(404).send("usuario no encontrado")
@@ -12,7 +20,7 @@ ruta.get("/usuarios/:id", (req, res) => {
     }
     res.send(usuario)
 });
-ruta.post("/usuarios", (req, res) => {
+ruta.post("/", (req, res) => {
     const schema = Joi.object({
         nombre: Joi.string().min(3).max(10).required(),
     })
@@ -31,7 +39,7 @@ ruta.post("/usuarios", (req, res) => {
         return
     }
 });
-ruta.put("/usuarios/:id", (req, res) => {
+ruta.put("/:id", (req, res) => {
     let usuario = encontrarUsuario(req.params.id)
     if (!usuario) {
         res.status(404).send("usuario no encontrado")
@@ -47,7 +55,7 @@ ruta.put("/usuarios/:id", (req, res) => {
     res.send(usuario)
 })
 
-ruta.delete("/usuarios/:id", (req, res) => {
+ruta.delete("/:id", (req, res) => {
     let usuario = encontrarUsuario(req.params.id)
     if (!usuario) {
         res.status(404).send("usuario no encontrado")
@@ -57,3 +65,16 @@ ruta.delete("/usuarios/:id", (req, res) => {
     usuarios.splice(index, 1)
     res.send(usuarios)
 })
+
+function encontrarUsuario(id) {
+    return usuarios.find(u => u.id === parseInt(id))
+}
+
+function validarUsuario(nombre) {
+    const schema = Joi.object({
+        nombre: Joi.string().min(3).max(10).required(),
+    })
+    return schema.validate({ nombre: nombre });
+}
+
+module.exports = ruta;
